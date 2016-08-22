@@ -36,14 +36,6 @@
 		 */
 		var settings = $.extend({}, defaults, userSettings);
 
-		/**
-		 * Iterator used to make each added
-		 * repeatable element unique
-		 * @type {Number}
-		 */
-		
-		var i = settings.startIndex;
-
 		
 		/**
 		 * Total templated items found on the page
@@ -55,7 +47,20 @@
 			return $(target).find(settings.itemContainer).length;
 		}();
 
+
+		/**
+		 * Iterator used to make each added
+		 * repeatable element unique
+		 * @type {Number}
+		 */
 		
+		var i = settings.startIndex;
+
+		if (total) {
+			i = $(settings.itemContainer).last().data(settings.dataIndexName) + 1;
+		}
+		
+
 		/**
 		 * Add an element to the target
 		 * and call the callback function
