@@ -7,24 +7,21 @@
 		 * @type {Object}
 		 */
 		var defaults = {
-			addTrigger: ".add",
-			deleteTrigger: ".delete",
-			max: null,
-			startWith: 0,
-			template: null,
-			itemContainer: ".field-group",
-			beforeAdd: function () {},
-			afterAdd: function () {},
-			beforeDelete: function () {},
-			afterDelete: function () {}
+			addTrigger     : ".add",
+			deleteTrigger  : ".delete",
+			max 		   : null,
+			startWith 	   : 0,
+			startIndex 	   : 0,
+			dataIndexName  : "index",
+			template 	   : null,
+			addedLabel 	   : "new",
+			itemContainer  : ".field-group",
+			beforeAdd 	   : function () {},
+			afterAdd	   : function () {},
+			beforeDelete   : function () {},
+			afterDelete	   : function () {}
 		};
 
-		/**
-		 * Iterator used to make each added
-		 * repeatable element unique
-		 * @type {Number}
-		 */
-		var i = 0;
 		
 		/**
 		 * DOM element into which repeatable
@@ -38,6 +35,15 @@
 		 * @type {array}
 		 */
 		var settings = $.extend({}, defaults, userSettings);
+
+		/**
+		 * Iterator used to make each added
+		 * repeatable element unique
+		 * @type {Number}
+		 */
+		
+		var i = settings.startIndex;
+
 		
 		/**
 		 * Total templated items found on the page
@@ -74,6 +80,21 @@
 			settings.beforeDelete.call(this);
 			$(this).parents(settings.itemContainer).first().remove();
 			total--;
+
+			if (total == 0 ) { 
+				i = settings.startIndex;
+			}else{
+
+				var index = $(settings.itemContainer).last().data(settings.dataIndexName);
+
+				if (index != undefined) {
+
+					if (index != '') {
+						i =  $(settings.itemContainer).last().data(settings.dataIndexName) + 1;
+					}
+				}
+			}
+
 			maintainAddBtn();
 			settings.afterDelete.call(this);
 		};
@@ -95,7 +116,7 @@
 		 */
 		var getUniqueTemplate = function () {
 			var template = $(settings.template).html();
-			template = template.replace(/{\?}/g, "new" + i++); 	// {?} => iterated placeholder
+			template = template.replace(/{\?}/g, settings.addedLabel + i++); 	// {?} => iterated placeholder
 			template = template.replace(/\{[^\?\}]*\}/g, ""); 	// {valuePlaceholder} => ""
 			return $(template);
 		};
