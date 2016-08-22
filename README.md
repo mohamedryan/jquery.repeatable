@@ -29,7 +29,7 @@ The field group template contains html for the group of form fields that will be
 
 ```html
 <script type="text/template" id="people">
-<div class="field-group">
+<div class="field-group" data-index={?}>
 	<label for="firstname_{?}">First name</label>
 	<input type="text" name="firstname_{?}" value="" id="firstname_{?}" />
 
@@ -56,6 +56,12 @@ $(function() {
 When a user clicks on the `.add` button, the script will render a new `.field-group` within the `.repeatable-container`. Each `{?}` will be replaced with a unique value so that each field is unique in the scope of the form. If a user clicks on a `.delete` button within a group, that group will be removed from the form.
 
 
+### What Added To This Fork : 
+
+* You can modify the started value of {?}
+* When deleting all templates , The value of {?} start from the beginning.
+* When deleting the last template , the next value of {?} of added template start after the value of {?} of the last existing template.
+
 <a name="settings"></a>
 ### Settings
 
@@ -69,4 +75,7 @@ When a user clicks on the `.add` button, the script will render a new `.field-gr
 * __beforeDelete__: _Optional_. (function) A function to run before an item is deleted from the repeatable item container. Default: none
 * __afterDelete__: _Optional_. (function) A function to run after an item is deleted from the repeatable item container. Default: none
 * __startWith__: _Optional_. (integer) The number of field group elements to prepopulate the form with. Default: 0
+* __startIndex__: _Optional_. (integer) The started value of {?} . Default: 0
+* __addedLabel__: _Optional_. (string) The word that appended to the {?} value . Default: 'new'
+* __dataIndexName__: _Optional_. (string) The name of data attribute that hold the current {?} value . Default: 'index'
 * __template__: _Required_. (string) The selector that contains the form field group template.
