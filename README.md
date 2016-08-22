@@ -60,7 +60,7 @@ When a user clicks on the `.add` button, the script will render a new `.field-gr
 
 * You can modify the started value of {?}
 * When deleting all templates , The value of {?} start from the beginning.
-* When deleting the last template , the next value of {?} of added template start after the value of {?{ of the last existing template.
+* When deleting the last template , the next value of {?} of added template start after the value of {?} of the last existing template.
 
 <a name="settings"></a>
 ### Settings
