@@ -56,6 +56,12 @@ $(function() {
 When a user clicks on the `.add` button, the script will render a new `.field-group` within the `.repeatable-container`. Each `{?}` will be replaced with a unique value so that each field is unique in the scope of the form. If a user clicks on a `.delete` button within a group, that group will be removed from the form.
 
 
+### What Added To This Fork : 
+
+* You can modify the started value of {?}
+* When deleting all templates , The value of {?} start from the beginning.
+* When deleting the last template , the next value of {?} of added template start after the value of {?{ of the last existing template.
+
 <a name="settings"></a>
 ### Settings
 
